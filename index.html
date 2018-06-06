@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Wix site</title>
+</head>
+<body>
+<iframe id="embedded" src="embedded.html">
+    Ваш браузер устарел, советуем использовать современные браузеры.
+</iframe>
+<button onclick="msg();">Отправить сообщение</button>
+<script>
+    function msg() {
+        document.getElementById('embedded').contentWindow.postMessage({
+            customerName: 'Maxim',
+            customerEmail: 'sunmax1234@mail.ru'
+        }, '*');
+    }
+
+    function onpayment(e) {
+
+    }
+</script>
+</body>
+</html>

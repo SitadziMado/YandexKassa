@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Embedded</title>
+</head>
+<body>
+<h2>Оплата подписки на игру</h2>
+<div>Стоимость товара: 1 руб.</div><hr>
+
+<!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
+     в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
+<form action="https://money.yandex.ru/eshop.xml" method="post" target="_blank">
+    <input required name="shopId" value="507732" type="hidden"/>
+    <input required name="scid" value="731961" type="hidden"/>
+    <input required name="sum" value="1" type="hidden"/>
+    <input required name="customerNumber" value="100" size="64" type="hidden"/>
+
+    <label for="nameLabel">Имя клиента</label><br>
+    <input id="nameLabel" name="custName" value="Имя клиента" size="64" disabled/>
+    <label for="nameLabel">Почта клиента</label><br>
+    <input id="emailLabel" name="custEmail" value="Почта клиента" size="64" disabled/>
+    <!--input name="custAddr" value="" size="64" type="hidden"/-->
+    <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
+
+    <input id="payButton" type="submit" value="Оплатить">
+</form>
+
+<script>
+    function onmessage(e) {
+        var data = e.data;
+        var origin = e.origin;
+
+        if (origin.indexOf("http://localhost") === -1) {
+            alert('Запрос пришел с другого домена: ' + origin);
+            return;
+        }
+
+        var onpayment = data.onpayment;
+        var name = data['customerName'];
+        var email = data['customerEmail'];
+
+        if (/*!onpayment ||*/ !name || !email) {
+            var err = 'В форму оплаты переданы не все данные';
+            alert(err);
+            throw new Error(err);
+        }
+
+        var nameLabel = document.getElementById('nameLabel');
+        var emailLabel = document.getElementById('emailLabel');
+
+        nameLabel.value = name;
+        emailLabel.value = email;
+
+        // document.getElementById('payButton').onclick = onpayment;
+    }
+
+    if (typeof window.addEventListener !== 'undefined') {
+        window.addEventListener('message', onmessage, false);
+    } else if (typeof window.attachEvent !== 'undefined') {
+        window.attachEvent('onmessage', onmessage);
+    }
+</script>
+</body>
+</html>
