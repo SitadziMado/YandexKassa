@@ -11,7 +11,7 @@
 <!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
      в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
 <form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank"
-onsubmit="onsubmit(this);">
+onsubmit="onPay(this);">
     <input required name="shopId" value="507732" type="hidden"/>
     <input required name="scid" value="731961" type="hidden"/>
     <input required name="sum" value="1" type="hidden"/>
@@ -73,14 +73,6 @@ onsubmit="onsubmit(this);">
     }
 
     function onPay(e) {
-        var submit = document.getElementById('payButton');
-
-        /*var event = new Event("submit");
-        var res = submit.dispatchEvent(event);*/
-        // document.getElementById('form').submit();
-    }
-
-    function onsubmit(me) {
         window.parent.postMessage(
             { type: 'pay' },
             '*'
