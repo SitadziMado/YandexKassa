@@ -12,13 +12,10 @@
 <script>
     function msg() {
         document.getElementById('embedded').contentWindow.postMessage({
+            type: 'fillInfo',
             customerName: 'Maxim',
             customerEmail: 'sunmax1234@mail.ru'
         }, '*');
-    }
-
-    function onpayment(e) {
-
     }
 </script>
 </body>

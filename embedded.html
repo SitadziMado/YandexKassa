@@ -10,49 +10,59 @@
 
 <!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
      в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
-<form action="https://money.yandex.ru/eshop.xml" method="post" target="_blank">
+<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank">
     <input required name="shopId" value="507732" type="hidden"/>
     <input required name="scid" value="731961" type="hidden"/>
     <input required name="sum" value="1" type="hidden"/>
-    <input required name="customerNumber" value="100" size="64" type="hidden"/>
+    <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
 
     <label for="nameLabel">Имя клиента</label><br>
-    <input id="nameLabel" name="custName" value="Имя клиента" size="64" disabled/>
+    <input required id="nameLabel" name="custName" placeholder="Введите свое имя и фамилию" size="64"/>
     <label for="nameLabel">Почта клиента</label><br>
     <input id="emailLabel" name="custEmail" value="Почта клиента" size="64" disabled/>
     <!--input name="custAddr" value="" size="64" type="hidden"/-->
     <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
 
-    <input id="payButton" type="submit" value="Оплатить">
+    <input id="payButton" type="hidden" value="Оплатить">
 </form>
 
 <script>
+    var msgHandlers = {
+        fillInfo: onFillInfo,
+        pay: onPay
+    };
+
     function onmessage(e) {
         var data = e.data;
         var origin = e.origin;
 
-        if (origin.indexOf("http://localhost") === -1) {
+        /*if (origin.indexOf("http://localhost") === -1) {
             alert('Запрос пришел с другого домена: ' + origin);
             return;
+        }*/
+
+        if (data['type'] === undefined) {
+            alert('Некорректное сообщение');
         }
 
-        var onpayment = data.onpayment;
-        var name = data['customerName'];
-        var email = data['customerEmail'];
+        var f = msgHandlers[data['type']];
 
-        if (/*!onpayment ||*/ !name || !email) {
-            var err = 'В форму оплаты переданы не все данные';
-            alert(err);
-            throw new Error(err);
+        if (f) {
+            f(data);
+        } else {
+            alert('Неверный тип сообщения');
         }
+    }
 
-        var nameLabel = document.getElementById('nameLabel');
+    function onFillInfo(e) {
+        var idLabel = document.getElementById('idLabel');
+        idLabel.value = e['customerId'];
         var emailLabel = document.getElementById('emailLabel');
+        emailLabel.value = e['customerEmail'];
+    }
 
-        nameLabel.value = name;
-        emailLabel.value = email;
-
-        // document.getElementById('payButton').onclick = onpayment;
+    function onPay(e) {
+        document.getElementById('form').submit();
     }
 
     if (typeof window.addEventListener !== 'undefined') {
