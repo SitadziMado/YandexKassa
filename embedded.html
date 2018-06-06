@@ -10,20 +10,22 @@
 
 <!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
      в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
-<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="form">
+<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_parent">
     <input required name="shopId" value="507732" type="hidden"/>
     <input required name="scid" value="731961" type="hidden"/>
     <input required name="sum" value="1" type="hidden"/>
     <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
 
     <label for="nameLabel">Имя клиента</label><br>
-    <input required id="nameLabel" name="custName" value="" placeholder="Введите свое имя и фамилию" size="64"/>
+    <input required id="nameLabel" name="custName" value=""
+           placeholder="Введите свое имя и фамилию" size="64"/><br>
     <label for="nameLabel">Почта клиента</label><br>
-    <input required id="emailLabel" name="custEmail" value="" placeholder="Введите свою почту" size="64"/>
+    <input required id="emailLabel" name="custEmail" value=""
+           placeholder="Введите свою почту" size="64"/><br>
     <!--input name="custAddr" value="" size="64" type="hidden"/-->
     <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
 
-    <input id="payButton" type="hidden" value="Оплатить">
+    <input id="payButton" type="hidden" value="Перейти на страницу оплаты">
 </form>
 
 <script>
@@ -70,12 +72,12 @@
     }
 
     function onPay(e) {
-        var submit = document.getElementById('form');
-        //submit.type = 'submit';
+        var submit = document.getElementById('payButton');
+        submit.type = 'submit';
 
         /*var event = new Event("submit");
         var res = submit.dispatchEvent(event);*/
-        document.getElementById('form').submit();
+        // document.getElementById('form').submit();
     }
 
     if (typeof window.addEventListener !== 'undefined') {
