@@ -10,16 +10,16 @@
 
 <!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
      в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
-<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank">
+<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_parent">
     <input required name="shopId" value="507732" type="hidden"/>
     <input required name="scid" value="731961" type="hidden"/>
     <input required name="sum" value="1" type="hidden"/>
     <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
 
     <label for="nameLabel">Имя клиента</label><br>
-    <input required id="nameLabel" name="custName" placeholder="Введите свое имя и фамилию" size="64"/>
+    <input required id="nameLabel" name="custName" value="" placeholder="Введите свое имя и фамилию" size="64"/>
     <label for="nameLabel">Почта клиента</label><br>
-    <input id="emailLabel" name="custEmail" value="Почта клиента" size="64" disabled/>
+    <input required id="emailLabel" name="custEmail" value="" placeholder="Введите свою почту" size="64"/>
     <!--input name="custAddr" value="" size="64" type="hidden"/-->
     <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
 
@@ -55,13 +55,26 @@
     }
 
     function onFillInfo(e) {
-        var idLabel = document.getElementById('idLabel');
-        idLabel.value = e['customerId'];
-        var emailLabel = document.getElementById('emailLabel');
-        emailLabel.value = e['customerEmail'];
+        var id = e['customerId'];
+        var email = e['customerEmail'];
+
+        if (id) {
+            var idLabel = document.getElementById('idLabel');
+            idLabel.value = id;
+        }
+
+        if (email) {
+            var emailLabel = document.getElementById('emailLabel');
+            emailLabel.value = email;
+        }
     }
 
     function onPay(e) {
+        var submit = document.getElementById('form');
+        //submit.type = 'submit';
+
+        /*var event = new Event("submit");
+        var res = submit.dispatchEvent(event);*/
         document.getElementById('form').submit();
     }
 
