@@ -3,87 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Embedded</title>
+    <link rel="stylesheet" href="embedded.css">
 </head>
 <body>
-<h2>Оплата подписки на игру</h2>
-<div>Стоимость товара: 1 руб.</div><hr>
+<div id="main">
+    <h2>Оплата подписки на игру</h2>
+    <div>Стоимость товара: 1 руб.</div><hr>
 
-<!-- Эти поля обязательные, их нельзя удалять из платежной формы =============================
-     в полях value="" в строках shopid и scid пропишите требуемые значения                 -->
-<form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank"
-onsubmit="onPay(this);">
-    <input required name="shopId" value="507732" type="hidden"/>
-    <input required name="scid" value="731961" type="hidden"/>
-    <input required name="sum" value="1" type="hidden"/>
-    <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
+    <form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank"
+    onsubmit="onPay(this);">
+        <input required name="shopId" value="507732" type="hidden"/>
+        <input required name="scid" value="731961" type="hidden"/>
+        <input required name="sum" value="1" type="hidden"/>
+        <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
 
-    <label for="nameLabel">Имя клиента</label><br>
-    <input required id="nameLabel" name="custName" value=""
-           placeholder="Введите свое имя и фамилию" size="64"/><br>
-    <label for="nameLabel">Почта клиента</label><br>
-    <input required id="emailLabel" name="custEmail" value=""
-           placeholder="Введите свою почту" size="64"/><br>
-    <!--input name="custAddr" value="" size="64" type="hidden"/-->
-    <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
+        <label for="nameLabel">Имя клиента</label><br>
+        <input required id="nameLabel" name="custName" value=""
+               placeholder="Введите свое имя и фамилию" size="64"/><br>
+        <label for="nameLabel">Почта клиента</label><br>
+        <input required id="emailLabel" name="custEmail" value=""
+               placeholder="Введите свою почту" size="64"/><br>
+        <!--input name="custAddr" value="" size="64" type="hidden"/-->
+        <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
 
-    <input id="payButton" type="submit" value="Перейти на страницу оплаты">
-</form>
-
-<script>
-    var msgHandlers = {
-        fillInfo: onFillInfo //,
-        // pay: onPay
-    };
-
-    function onmessage(e) {
-        var data = e.data;
-        var origin = e.origin;
-
-        /*if (origin.indexOf("http://localhost") === -1) {
-            alert('Запрос пришел с другого домена: ' + origin);
-            return;
-        }*/
-
-        if (data['type'] === undefined) {
-            alert('Некорректное сообщение');
-        }
-
-        var f = msgHandlers[data['type']];
-
-        if (f) {
-            f(data);
-        } else {
-            alert('Неверный тип сообщения');
-        }
-    }
-
-    function onFillInfo(e) {
-        var id = e['customerId'];
-        var email = e['customerEmail'];
-
-        if (id) {
-            var idLabel = document.getElementById('idLabel');
-            idLabel.value = id;
-        }
-
-        if (email) {
-            var emailLabel = document.getElementById('emailLabel');
-            emailLabel.value = email;
-        }
-    }
-
-    function onPay(e) {
-        window.parent.postMessage(
-            { type: 'pay' },
-            '*'
-        );
-    }
-
-    if (typeof window.addEventListener !== 'undefined') {
-        window.addEventListener('message', onmessage, false);
-    } else if (typeof window.attachEvent !== 'undefined') {
-        window.attachEvent('onmessage', onmessage);
-    }
-</script>
+        <input id="payButton" type="submit" value="Перейти на страницу оплаты">
+    </form>
+</div>
+<script src="embedded.js"></script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+@font-face {
+    font-family: GloberBold;
+    src: url("fonts/Glober Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Firenight;
+    src: url(fonts/Firenight-Regular.otf) format("opentype");
+}
+
+#main {
+    background-image: url("images/background.png");
+    height: 100%;
+    padding: 40%;
+}
+
+* {
+    font-family: GloberBold, "Arial Black", sans-serif;
+    color: #4e552f;
+}
+
+input[type="submit"] {
+    border: solid white 5px;
+    background-color: #9fc44e;
+    color: white;
+    font-family: Firenight, Impact, sans-serif;
+    font-size: 32px;
+}
+
+input[type="submit"]:hover {
+    background-color: #fbae17;
+}
