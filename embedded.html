@@ -7,8 +7,11 @@
 </head>
 <body>
 <div id="main">
-    <h2>Оплата игры</h2>
-    <div>Стоимость товара: 1 руб.</div><br>
+    <h1>Оплата игры</h1>
+    <div>Стоимость товара:
+        <span id="previousPriceSpan"></span>
+        <span id="priceSpan">299 руб.</span>
+    </div><br>
 
     <form id="form" action="https://money.yandex.ru/eshop.xml" method="post" target="_blank"
     onsubmit="onPay(this);">
@@ -19,14 +22,16 @@
 
         <label for="nameLabel">Имя клиента</label><br>
         <input required id="nameLabel" name="custName" value=""
-               placeholder="Введите свое имя и фамилию" size="64"/><br>
-        <label for="nameLabel">Почта клиента</label><br>
+               placeholder="*Введите свое имя и фамилию" size="28"/><br>
+        <label for="emailLabel">Почта клиента</label><br>
         <input required id="emailLabel" name="custEmail" value=""
-               placeholder="Введите свою почту" size="64"/><br>
+               placeholder="*Введите свою почту" size="28"/><br>
         <!--input name="custAddr" value="" size="64" type="hidden"/-->
-        <!--textarea name="orderDetails" value="" rows="5" cols="64" wrap="soft" type="hidden"></textarea><br-->
+        <label for="orderDetails">Промокод</label><br>
+        <input id="orderDetails" name="orderDetails" value="" size="28"
+               placeholder="Введите промокод" oninput="enterPromo(this.value);"><br>
 
-        <input id="payButton" type="submit" value="Перейти на страницу оплаты">
+        <input id="payButton" type="submit" value="Оплатить">
     </form>
 </div>
 <script src="embedded.js"></script>

@@ -47,6 +47,33 @@ function onPay(e) {
     );
 }
 
+function enterPromo(text) {
+    text = text.toUpperCase();
+
+    var currency = ' руб.';
+    var stdPrice = 299;
+    var price = stdPrice;
+
+    if (text === 'DOMRU') {
+        price = 129;
+    } else if (text === 'MATVEEV') {
+        price = 159;
+    }
+
+    var previousPriceSpan = document.getElementById('previousPriceSpan');
+    var priceSpan = document.getElementById('priceSpan');
+
+    priceSpan.innerHTML = price.toString() + currency;
+
+    if (price !== stdPrice) {
+        previousPriceSpan.innerHTML = stdPrice.toString() + currency;
+        priceSpan.className += ' sale';
+    } else {
+        previousPriceSpan.innerHTML = '';
+        priceSpan.className = '';
+    }
+}
+
 if (typeof window.addEventListener !== 'undefined') {
     window.addEventListener('message', onmessage, false);
 } else if (typeof window.attachEvent !== 'undefined') {

@@ -12,13 +12,25 @@
     /*background-image: url("images/background.png");*/
     background: transparent;
     height: 100%;
+    text-align: center;
+}
+
+#previousPriceSpan {
+    color: #fbae17;
+    text-decoration: line-through;
+}
+
+span.sale {
+    color: #9fc44e;
 }
 
 * {
     font-family: GloberBold, "Arial Black", sans-serif;
     color: #4e552f;
-    margin-top: 6px;
-    margin-bottom: 6px;
+}
+
+input {
+    margin-bottom: 10px;
 }
 
 input[type="submit"] {
