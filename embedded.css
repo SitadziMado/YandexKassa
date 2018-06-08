@@ -9,14 +9,16 @@
 }
 
 #main {
-    background-image: url("images/background.png");
+    /*background-image: url("images/background.png");*/
+    background: transparent;
     height: 100%;
-    padding: 40%;
 }
 
 * {
     font-family: GloberBold, "Arial Black", sans-serif;
     color: #4e552f;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 input[type="submit"] {
@@ -25,6 +27,7 @@ input[type="submit"] {
     color: white;
     font-family: Firenight, Impact, sans-serif;
     font-size: 32px;
+    padding: 10px;
 }
 
 input[type="submit"]:hover {
