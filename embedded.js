@@ -72,6 +72,8 @@ function enterPromo(text) {
         previousPriceSpan.innerHTML = '';
         priceSpan.className = '';
     }
+
+    document.getElementById('sumLabel').value = price;
 }
 
 if (typeof window.addEventListener !== 'undefined') {

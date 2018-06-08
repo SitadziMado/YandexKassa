@@ -8,7 +8,7 @@
 <body>
 <div id="main">
     <h1>Оплата игры</h1>
-    <div>Стоимость товара:
+    <div class="big">Стоимость игры:
         <span id="previousPriceSpan"></span>
         <span id="priceSpan">299 руб.</span>
     </div><br>
@@ -17,7 +17,7 @@
     onsubmit="onPay(this);">
         <input required name="shopId" value="507732" type="hidden"/>
         <input required name="scid" value="731961" type="hidden"/>
-        <input required name="sum" value="1" type="hidden"/>
+        <input id="sumLabel" required name="sum" value="1" type="hidden"/>
         <input id="idLabel" required name="customerNumber" value="100" size="64" type="hidden"/>
 
         <label for="nameLabel">Имя клиента</label><br>
