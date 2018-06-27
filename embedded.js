@@ -58,6 +58,8 @@ function enterPromo(text) {
         price = 129;
     } else if (text === 'MATVEEV') {
         price = 159;
+    } else if (text === 'AUSNATASHA') {
+        price = 249;
     }
 
     var previousPriceSpan = document.getElementById('previousPriceSpan');
