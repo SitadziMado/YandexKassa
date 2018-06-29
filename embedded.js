@@ -54,7 +54,7 @@ function enterPromo(text) {
     var stdPrice = 299;
     var price = stdPrice;
 
-    if (text === 'DOMRU') {
+    if (text === 'DOMRUMONEY') {
         price = 129;
     } else if (text === 'MATVEEV') {
         price = 159;
